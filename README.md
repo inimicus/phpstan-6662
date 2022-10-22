@@ -6,12 +6,14 @@ When a constant behind a require/include is non-scalar, it can not be found.
 
 Listing the file in the phpstan config under bootstrapFiles resolves the issue, however, as per phpstan v1.7.0 this should not be necessary.
 
+All testing performed with the `ghcr.io/phpstan/phpstan:1.8.10-php8.0` Docker image.
+
 # Example A
 
 Non-scaler constants are not found when behind a require/include statement.
 
 ```
-docker run --rm -v $PWD:/app ghcr.io/phpstan/phpstan analyze --level 1 .
+docker run --rm -v $PWD:/app ghcr.io/phpstan/phpstan:1.8.10-php8.0 analyze --level 1 .
  2/2 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
 
  ------ ---------------------------------------------------------------------
@@ -34,7 +36,7 @@ docker run --rm -v $PWD:/app ghcr.io/phpstan/phpstan analyze --level 1 .
 Using a configuration with `bootstrapFiles` listing the file containing the non-scaler constants allows these constants to be found.
 
 ```
-docker run --rm -v $PWD:/app ghcr.io/phpstan/phpstan analyze --level 1 -c fix-constants.neon .
+docker run --rm -v $PWD:/app ghcr.io/phpstan/phpstan:1.8.10-php8.0 analyze --level 1 -c fix-constants.neon .
  2/2 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
 
 
