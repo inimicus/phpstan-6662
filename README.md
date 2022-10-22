@@ -14,21 +14,19 @@ Non-scaler constants are not found when behind a require/include statement.
 
 ```
 docker run --rm -v $PWD:/app ghcr.io/phpstan/phpstan:1.8.10-php8.0 analyze --level 1 .
- 2/2 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
+  2/2 [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓] 100%
 
  ------ ---------------------------------------------------------------------
   Line   index.php
  ------ ---------------------------------------------------------------------
-  12     Constant GREET_REQUIRE_2 not found.
+  17     Constant GREET_REQUIRE_VAR not found.
          💡 Learn more at https://phpstan.org/user-guide/discovering-symbols
-  13     Constant GREET_REQUIRE_3 not found.
-         💡 Learn more at https://phpstan.org/user-guide/discovering-symbols
-  14     Constant GREET_REQUIRE_4 not found.
+  18     Constant GREET_REQUIRE_FUNCTION not found.
          💡 Learn more at https://phpstan.org/user-guide/discovering-symbols
  ------ ---------------------------------------------------------------------
 
 
- [ERROR] Found 3 errors
+ [ERROR] Found 2 errors
 ```
 
 # Example B
@@ -48,11 +46,29 @@ docker run --rm -v $PWD:/app ghcr.io/phpstan/phpstan:1.8.10-php8.0 analyze --lev
 ```
 php index.php
 string(5) "Hello"
-string(5) "hello"
+bool(true)
+string(5) "Hello"
+int(123)
+float(1.23)
+NULL
 string(5) "Hello"
 string(5) "Hello"
+array(1) {
+  [0]=>
+  string(5) "Hello"
+}
+string(13) "RequiredClass"
 string(6) "Cheers"
-string(6) "cheers"
+bool(false)
+string(6) "Cheers"
+int(456)
+float(4.56)
+NULL
 string(6) "Cheers"
 string(6) "Cheers"
+array(1) {
+  [0]=>
+  string(6) "Cheers"
+}
+string(11) "InlineClass"
 ```
